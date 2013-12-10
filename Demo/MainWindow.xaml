@@ -1,8 +1,14 @@
 ﻿<Window x:Class="Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <DataGrid AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn" CanUserAddRows="False" x:Name="TheDataGrid" ItemsSource="{Binding Data}">
+        <DataGrid.Resources>
+            <DataTemplate x:Key="dataItemCellTemplate">
+                <ComboBox SelectedValue="{Binding Path=SelectedOption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Options}"/>
+            </DataTemplate>
+        </DataGrid.Resources>
+    </DataGrid>
 </Window>
